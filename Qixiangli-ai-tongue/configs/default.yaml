@@ -1,0 +1,19 @@
+# 真实数据分析配置（与 tcm_tongue.pipeline.DEFAULT_CFG 对应，按需修改）
+subject_col: subject_id
+time_col: visit            # 数值型随访序号或天数
+site_col: site             # 中心 / 设备批次，用于独立验证划分
+dev_sites: [A]             # 开发集（拟合 + 内部交叉验证）
+ext_sites: [B]             # 外部独立验证集（不参与任何拟合）
+biomarkers: [crp, hba1c, hb, tg, alt, sbp]
+log_transform: [crp, tg]   # 偏态指标取对数后再分析
+covariates: [age, female, bmi]   # 类别变量请先编码为数值或字符串
+binary_targets: [elevated_crp, high_hba1c, anemia]
+syndrome_col: syndrome_label     # 专家辨证标注；没有则删除此行
+model: logreg              # logreg | gbm
+n_boot: 300
+monitor:
+  baseline_n: 4
+  cusum_k: 1.0
+  cusum_h: 4.0
+  sd_floor_ratio: 1.0
+  min_alarm_features: 3

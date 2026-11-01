@@ -1,0 +1,22 @@
+[build-system]
+requires = ["setuptools>=64"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "tcm-tongue-phenotype"
+version = "0.1.0"
+description = "AI tongue digital phenotyping & multimodal objective-biomarker association platform (research use)"
+readme = "README.md"
+requires-python = ">=3.9"
+license = { text = "MIT" }
+authors = [{ name = "Yunzi Chen (Qixiangli Health Technology)" }]
+dynamic = ["dependencies"]
+
+[tool.setuptools.dynamic]
+dependencies = { file = ["requirements.txt"] }
+
+[tool.setuptools.packages.find]
+include = ["tcm_tongue*"]
+
+[project.scripts]
+tcm-tongue = "tcm_tongue.cli:main"
